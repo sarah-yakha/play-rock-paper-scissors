@@ -1,0 +1,76 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-weight: 900;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin: 30px;
+
+}
+
+h1 {
+    color: rgb(93, 93, 140);
+    margin-top: 0;
+}
+
+#game-container {
+    margin-top: 20px;
+}
+.playerResult {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: rgb(38, 70, 117);
+}
+#playerСhoice, #computerСhoice {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0 ;
+    
+    
+    color: rgb(84, 84, 164);;
+}
+
+#result {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: rgb(146, 88, 88);
+}
+#rock, #paper,#scissors {
+    border-radius: 10px;
+    border-color:  rgb(114, 167, 241);
+    background-color: rgb(114, 167, 241);
+    width: 160px;
+    margin-right: 20px;
+    cursor: pointer;
+    transition: 0.3s ease-in;
+}
+#rock:hover, #paper:hover,#scissors:hover {
+    transform: scale(1.1);
+}
+.paper-f {
+    width: 150px;
+    border-radius: 20px;
+    background-color: rgb(114, 167, 241);
+    margin-right: 20px;
+}
+
+
+.rock-f {
+width: 150px;
+border-radius: 20px;
+background-color: rgb(114, 167, 241);
+margin-right: 20px;
+}
+
+.scissors-f {
+width: 150px;
+border-radius: 20px;
+background-color: rgb(114, 167, 241);
+margin-right: 20px;   
+}
+
+
+

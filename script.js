@@ -1,61 +1,71 @@
-// Функция для компьютера
-function getComputerChoice() {
-    const choices = ['камень', 'ножницы', 'бумага'];
-    const randomIndex =Math.floor(Math.random() * 3);
-    console.log('----------------------------');
-    return choices[randomIndex];
-};
+const rockBtn = document.getElementById("rock");
+const paperBtn = document.getElementById("paper");
+const scissorsBtn = document.getElementById("scissors");
+const playerChoiceEl = document.getElementById("playerСhoice");
+const computerChoiceEl = document.getElementById("computerСhoice");
+const resultEl = document.getElementById("result");
+const playScore = document.getElementById("playScore");
+const compScore = document.getElementById("compScore");
+let playScoreCount = 0;
+let computerScoreCount = 0;
+let drawCount = 0;
+let maxRounds = 5;
 
-    const rules = {
-        'камень': { 'ножницы': 'победа', 'камень': 'ничья', 'бумага': 'поражение' },
-        'бумага': { 'камень': 'победа', 'бумага': 'ничья', 'ножницы': 'поражение' },
-        'ножницы': { 'бумага': 'победа', 'ножницы': 'ничья', 'камень': 'поражение' }
-      };
-      
-      // Функция для определения результата сражения между двумя игроками.
-      function getResult(player1,player2) {
-        return rules[player1][player2];
-      }
-      
-      // Пример использования функции getResult для двух игроков.
-      const player1Choice = 'камень'; // выбор первого игрока (например, 'камень')
-      const player2Choice = getComputerChoice(); // выбор второго игрока (например, 'ножницы')
-      
-      // Получаем результат сравнения выборов игроков.
-      const result = getResult(player1Choice, player2Choice);
-      
-      // Выводим результат на экран в зависимости от полученного результата.
-      console.log(result === 'победа' ? 'Игрок 1 победил!' : (result === 'поражение' ? 'Игрок 2 победил!' : 'Ничья!'));
+rockBtn.addEventListener("click", () => playGame("rock"));
+paperBtn.addEventListener("click", () => playGame("paper"));
+scissorsBtn.addEventListener("click", () => playGame("scissors"));
 
-    
-
-
-    function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-
-    for (let i = 1; i < 5; i++) {
-        const playerSelection = prompt("Введите: камень, ножницы или бумага");
-        const computerSelection = getComputerChoice();
-        const result = getResult(player1Choice, player2Choice);
-        console.log(result);
-
-        if (result.includes('победа')){
-            playerScore++;
-        } else if (result.includes('поражение')){
-            computerScore++;
-        }
-        
-        console.log(`Счет: Игрок 1 ${playerScore} - Игрок 2 ${computerScore}`);
-    }
-
-    if (playerScore > computerScore) {
-        console.log("Молодец!ты выиграл.");
-    } else if (computerScore > playerScore) {
-        console.log("К сожалению, проиграл.");
-    } else {
-        console.log("Ничья");
-    }
+function playGame(playerChoice) {
+  const computerChoice = getComputerChoice();
+  playerChoiceEl.textContent = `ИГРОК : ${playerChoice}`;
+  computerChoiceEl.textContent = `КОМПЬЮТЕР : ${computerChoice}`;
+  const result = getWinner(playerChoice, computerChoice);
+  resultEl.textContent = result;
 }
 
-game();
+function getComputerChoice() {
+  const choices = ["rock", "paper", "scissors"];
+  return choices[Math.floor(Math.random() * 3)];
+}
+
+function getWinner(playerChoice, computerChoice) {
+  if (playScoreCount === maxRounds) {
+    alert("GAME OVER! ПОБЕДИТЕЛЬ: ИГРОК");
+    finishPlay();
+    return;
+  }
+  if (computerScoreCount === maxRounds) {
+    alert("GAME OVER! ПОБЕДИТЕЛЬ: КОМПЬЮТЕР");
+    finishPlay();
+    return;
+  }
+  if (drawCount === maxRounds) {
+    alert("GAME OVER! НИЧЬЯ");
+    finishPlay();
+    return;
+  }
+  if (playerChoice === computerChoice) {
+    drawCount++;
+    return "НИЧЬЯ!";
+  }
+  if (
+    (playerChoice === "rock" && computerChoice === "scissors") ||
+    (playerChoice === "paper" && computerChoice === "rock") ||
+    (playerChoice === "scissors" && computerChoice === "paper")
+  ) {
+    playScoreCount++;
+    playScore.textContent = playScoreCount;
+    return "ТЫ ВЫИГРАЛ!";
+  } else {
+    computerScoreCount++;
+    compScore.textContent = computerScoreCount;
+    return "КОМПЬЮТЕР ВЫИГРАЛ!";
+  }
+}
+function finishPlay() {
+  playScoreCount = 0;
+  computerScoreCount = 0;
+  drawCount = 0;
+  playScore.textContent = playScoreCount;
+  compScore.textContent = computerScoreCount;
+}
